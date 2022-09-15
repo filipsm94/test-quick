@@ -1,0 +1,31 @@
+@use 'src/mixin' as mixin
+@use 'src/colors'
+
+.content
+    grid-area: main
+    min-height: 90vh
+    width: 100%
+    padding-block: 1rem
+    box-sizing: border-box
+    padding-inline: 1rem
+
+    @include mixin.screen(1440px)
+        max-width: 1440px
+header
+    grid-area: header
+    text-align: start
+    background-color: colors.$primarydark-color
+    width: 100%
+    color: colors.$white-color
+
+footer
+    height: 10vh
+    grid-area: footer
+    text-align: center
+    background-color: colors.$primarydark-color
+    color: colors.$white-color
+    box-sizing: border-box
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%

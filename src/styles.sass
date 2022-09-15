@@ -1,0 +1,41 @@
+@use './colors' as colors
+@use './generate' as generate
+@use './mixin' as mixin
+
+*
+    margin: 0
+    padding: 0
+
+ul
+    margin-inline: 1rem
+h1
+    margin-block-end: 2.5rem
+h2
+    margin-block-end: 1.5rem
+h3
+    margin-block-end: 1rem
+p
+    margin-block-end: .5rem
+
+
+body
+    background-color: colors.$gray-color
+    font-family: 'Montserrat', sans-serif
+
+.container
+    display: grid
+    grid-template-rows: auto
+    grid-template-columns: 100%
+    grid-template-areas: "header" "main" "footer"
+    justify-items: center
+
+    @include mixin.screen(500px)
+        grid-template-columns: 5% 90% 5%
+        grid-template-areas: "header header header" "main main main" "footer footer footer"
+
+
+    @include mixin.screen(900px)
+        grid-template-columns: 10% 80% 10%
+
+@include generate.Spacings('margin')
+@include generate.Spacings('padding')

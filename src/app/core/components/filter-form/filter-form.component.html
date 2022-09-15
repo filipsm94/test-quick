@@ -1,0 +1,30 @@
+<form class="loginForm mt-2" [formGroup]="filterForm">
+    <h2>Líder:</h2>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre: </mat-label>
+        <input matInput placeholder="Felipe" formControlName="name">
+    </mat-form-field>
+    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+        <div *ngIf="name?.errors?.required">
+            El campo es requerido.
+        </div>
+        <div *ngIf="name?.errors?.minlength">
+            El campo debe tener minimo 2 caracteres.
+        </div>
+    </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Ubicación</mat-label>
+        <mat-select formControlName="locationName" (ngModelChange)="getTimezone($event)">
+            <mat-option value="">Sin seleccionar</mat-option>
+            <mat-option *ngFor="let country of countriesList" [value]="country">
+                {{country.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p *ngIf="timezoneValue != ''"><strong>Zona horaria:</strong> {{timezoneValue}}</p>
+    <div *ngIf="locationName?.invalid && (locationName?.dirty || locationName?.touched)" class="alert alert-danger">
+        <div *ngIf="name?.errors?.required">
+            El campo es requerido.
+        </div>
+    </div>
+</form>

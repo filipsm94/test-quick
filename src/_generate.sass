@@ -1,0 +1,30 @@
+
+$sizes: 1,2,3,4,5
+$sides: 't','b','l','r','x','y'
+@function str-insert($space)
+    @if $space == margin
+        @return '.m'
+    @else
+        @return '.p'
+
+@mixin Spacings($space)
+    @each $size in $sizes
+        #{str-insert($space)}-#{$size}
+            #{$space}: #{$size}rem
+
+        @each $side in $sides
+            #{str-insert($space)}#{$side}-#{$size}
+                @if $side == t
+                    #{$space}-block-start: #{$size}rem
+                @else if $side == b
+                    #{$space}-block-end: #{$size}rem
+                @else if $side == l
+                    #{$space}-inline-start: #{$size}rem
+                @else if $side == r
+                    #{$space}-inline-start: #{$size}rem
+                @else if $side == x
+                    #{$space}-inline: #{$size}rem
+                @else if $side == y
+                    #{$space}-block: #{$size}rem
+                @else
+                    @error "Unknown side #{$side}."

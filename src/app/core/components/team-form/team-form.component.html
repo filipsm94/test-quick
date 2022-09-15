@@ -1,0 +1,26 @@
+<form class="loginForm mt-2" [formGroup]="teamForm">
+    <h2>Equipo:</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Ubicación</mat-label>
+        <mat-select formControlName="locationNameTeam">
+            <mat-option value="">Sin seleccionar</mat-option>
+            <mat-option *ngFor="let country of filterCountriesList" [value]="country">
+                {{country.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button [disabled]="!teamForm.valid" matSuffix mat-mini-fab color="primary"
+        (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+</form>
+<mat-action-list>
+    <mat-list-item *ngFor="let teamCountry of countriesTeamSelected">
+        <mat-icon matListIcon>groups</mat-icon>
+        <p matLine><strong>{{teamCountry.location.name}}</strong></p>
+        <p matLine><span> {{teamCountry.amount}} </span></p>
+        <button matSuffix mat-mini-fab color="primary" (click)="deleteMembers(teamCountry)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-list-item>
+</mat-action-list>
