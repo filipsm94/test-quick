@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ICountryModel } from 'src/app/shared/models/country.model';
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
 import { CountryService } from '../../services/country.service';
 
 @Component({
@@ -17,31 +18,33 @@ export class FilterFormComponent implements OnInit {
 
   public timezoneValue = ''
 
-  constructor(private countryService: CountryService) {
+  constructor(private countryService: CountryService, private storageService:StorageService) {
     this.countriesList = []
     this.filterForm = new FormGroup({
       name: new FormControl(null, [
         Validators.required,
         Validators.minLength(2)
       ]),
-      locationName: new FormControl(null, [Validators.required,]),
-      locationNameTeam: new FormControl(null, [Validators.required,]),
+      location: new FormControl(null, [Validators.required,])
     });
   }
 
   get name(): any { return this.filterForm.get('name'); }
-  get locationName(): any { return this.filterForm.get('locationName'); }
+  get location(): any { return this.filterForm.get('location'); }
 
 
   ngOnInit(): void {
+    this.filterForm.valueChanges.subscribe(form => {
+      this.storageService.updateLead({...form})
+    })
   }
 
-  getTimezone({ code }:ICountryModel): void {
+  getTimezone({ code }: ICountryModel): void {
     this.timezoneValue = this.countryService.findTimeZoneByCode(code, this.countriesList)
   }
 
-  updateState(){
-    
+  updateState() {
+
   }
 
 }

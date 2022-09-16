@@ -6,7 +6,7 @@ export interface IStorageService {
 
   updateTeam(team: Array<ITeamModel>): void;
 
-  getLead(): Promise<ILeadModel>;
+  getLead(): Observable<ILeadModel>;
   
   getTeam(): Observable<Array<ITeamModel>>;
 

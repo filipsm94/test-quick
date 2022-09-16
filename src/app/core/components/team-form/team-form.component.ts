@@ -55,8 +55,8 @@ export class TeamFormComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result)
-        if (this.isMaxAmountOfMembers(result)) {
+      if (result )
+        if (this.isMaxAmountOfMembers(result) && result > 0) {
           this.countriesTeamSelected.push({
             location: locationValue,
             amount: result
@@ -64,7 +64,7 @@ export class TeamFormComponent implements OnInit {
           this.updateFormInfo()
         }
         else {
-          alert('Superó el maximo de miembros permitidos: 10')
+          alert('Superó el maximo de miembros permitidos: 10 ó ingreso numeros negativos')
         }
       this.teamForm.reset()
     });

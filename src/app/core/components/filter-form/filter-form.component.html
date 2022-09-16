@@ -14,7 +14,7 @@
     </div>
     <mat-form-field appearance="fill">
         <mat-label>Ubicación</mat-label>
-        <mat-select formControlName="locationName" (ngModelChange)="getTimezone($event)">
+        <mat-select formControlName="location" (ngModelChange)="getTimezone($event)">
             <mat-option value="">Sin seleccionar</mat-option>
             <mat-option *ngFor="let country of countriesList" [value]="country">
                 {{country.name}}
@@ -22,7 +22,7 @@
         </mat-select>
     </mat-form-field>
     <p *ngIf="timezoneValue != ''"><strong>Zona horaria:</strong> {{timezoneValue}}</p>
-    <div *ngIf="locationName?.invalid && (locationName?.dirty || locationName?.touched)" class="alert alert-danger">
+    <div *ngIf="location?.invalid && (location?.dirty || location?.touched)" class="alert alert-danger">
         <div *ngIf="name?.errors?.required">
             El campo es requerido.
         </div>

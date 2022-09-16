@@ -6,9 +6,9 @@
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <app-filter-form *ngIf="listOfCountries.length >0" [countriesList]="listOfCountries"></app-filter-form>
-            <app-team-form *ngIf="listOfCountries.length >0" [countriesList]="listOfCountries"></app-team-form>
+            <app-team-form *ngIf="listOfCountries.length >0 && validSelectedLead" [countriesList]="listOfCountries"></app-team-form>
         </mat-drawer>
-        <mat-drawer-content [ngStyle]="{'margin-left': (isHandset$ | async) ? '1px' : '250px' }  ">
+        <mat-drawer-content [style]="{'margin-left': (isHandset$ | async) ? '1px' : '250px' }  ">
             <button type="button" aria-label="Toggle sidenav"
                 [ngStyle]="{'display': (isHandset$ | async) ? 'block' : 'flex' }  " mat-icon-button
                 (click)="drawer.toggle()" *ngIf="isHandset$ | async">

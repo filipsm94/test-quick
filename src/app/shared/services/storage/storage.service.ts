@@ -27,20 +27,12 @@ export class StorageService implements IStorageService {
     this.dispatchAction(updateTeamInfo({ payload: team}));
   }
   
-  public getLead(): Promise<ILeadModel> {
-    return firstValueFrom(this.store.pipe(
-      select(getLeadSelector),
-      map((Lead) => Lead),
-      take(1)
-    ))
+  public getLead(): Observable<ILeadModel> {
+    return this.store.select(getLeadSelector)
+    
   }
 
   public getTeam(): Observable<Array<ITeamModel>> {
-    // return firstValueFrom(this.store.pipe(
-    //   select(getTeamSelector),
-    //   map((Team) => Team),
-    //   take(1)
-    // ))
     return this.store.select(getTeamSelector)
   }
 

@@ -6,11 +6,11 @@
     </mat-radio-group>
     <h2>Mira el tiempo disponible de tu equipo</h2>
     <div>
-        <button mat-mini-fab color="primary" (click)="BackTime()">
+        <button mat-mini-fab class="arrow-color" (click)="BackTime()">
             <mat-icon>arrow_back_ios</mat-icon>
         </button>
         {{getCurrentlyTime()}}
-        <button mat-mini-fab color="primary" (click)="ForwardTime()">
+        <button mat-mini-fab class="arrow-color" (click)="ForwardTime()">
             <mat-icon>arrow_forward_ios</mat-icon>
         </button>
 
