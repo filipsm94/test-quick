@@ -1,8 +1,15 @@
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ICountryModel } from 'src/app/shared/models/country.model';
 import { ITeamModel } from 'src/app/shared/models/state.model';
-import { StorageService } from 'src/app/shared/services/storage/storage.service';
 import { CountryService } from '../../services/country.service';
+import { ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,41 +17,36 @@ import { CountryService } from '../../services/country.service';
   styleUrls: ['./dashboard.component.sass']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('drawer') drawer: any;
+  public selectedItem: string = '';
+  public isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.XSmall)
+    .pipe(map((result: BreakpointState) => result.matches));
+
+
   listOfCountries: Array<ICountryModel> = []
   lookAtTime = 'week'
   selectedTeam: Array<ITeamModel> = []
+  open = true
+
 
   constructor(
     private countryService: CountryService,
-    private storageService: StorageService,
+    private breakpointObserver: BreakpointObserver
   ) { }
 
   ngOnInit(): void {
-    this.FillCars()
-    // this.getSelectedTeam()
+    this.FillCountries()
   }
 
-  async FillCars(): Promise<void> {
+  async FillCountries(): Promise<void> {
     this.listOfCountries = await this.countryService.getAllOrderCountries()
-    // console.log('this.listOfCountries',this.listOfCountries);
-    
   }
 
-  // async getSelectedTeam() {
-  //   this.storageService.getTeam().subscribe({
-  //     next: (v) => {
-  //       console.log('out');
-        
-  //       this.selectedTeam = [...v]
-  //     },
-  //     error: (e) => console.error(e),
-  //     complete: () => console.info('complete')
-  //   })
-
-  // }
-
-  async filterListCars(filterEvent: string): Promise<void> {
-    // this.listOfCars = await this.carService.filterCars(filterEvent)
+  closeSideNav() {
+    if (this.drawer._mode=='over') {
+      this.drawer.close();
+    }
   }
 
 }

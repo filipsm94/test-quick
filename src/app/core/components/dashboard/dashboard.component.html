@@ -1,10 +1,19 @@
 <section class="dashboard">
     <mat-drawer-container>
-        <mat-drawer mode="side" opened >
+        <mat-drawer #drawer [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button
+                (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
             <app-filter-form *ngIf="listOfCountries.length >0" [countriesList]="listOfCountries"></app-filter-form>
             <app-team-form *ngIf="listOfCountries.length >0" [countriesList]="listOfCountries"></app-team-form>
         </mat-drawer>
-        <mat-drawer-content style="margin-left: 250px">
+        <mat-drawer-content [ngStyle]="{'margin-left': (isHandset$ | async) ? '1px' : '250px' }  ">
+            <button type="button" aria-label="Toggle sidenav"
+                [ngStyle]="{'display': (isHandset$ | async) ? 'block' : 'flex' }  " mat-icon-button
+                (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
             <app-info-time-team></app-info-time-team>
         </mat-drawer-content>
     </mat-drawer-container>

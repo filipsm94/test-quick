@@ -1,3 +1,5 @@
+@use 'src/mixin' as mixin
+    
 #carrusel
     width: 100%
 
@@ -18,5 +20,8 @@
     width: 100%
     min-height: 90vh
 
+
     & .mat-drawer
-        background-color: transparent
+        background-color: white
+        @include mixin.screen(599px)
+            background-color: transparent
