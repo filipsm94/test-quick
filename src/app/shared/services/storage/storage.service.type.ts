@@ -1,4 +1,4 @@
-import { ICarModel } from '../../models/car.model';
+import { Observable } from 'rxjs';
 import { ILeadModel, ITeamModel } from '../../models/state.model';
 
 export interface IStorageService {
@@ -8,7 +8,7 @@ export interface IStorageService {
 
   getLead(): Promise<ILeadModel>;
   
-  getTeam(): Promise<Array<ITeamModel>>;
+  getTeam(): Observable<Array<ITeamModel>>;
 
   clearInfo(): void
 }

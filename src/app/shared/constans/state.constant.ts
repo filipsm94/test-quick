@@ -17,3 +17,8 @@ export const empytTeam: ITeamModel = {
     },
     amount: 0
 }
+
+export enum Times {
+    Week = 'week',
+    Month = 'month'
+}

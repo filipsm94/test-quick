@@ -1,0 +1,45 @@
+<div>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="lookAtTime" (ngModelChange)="changeTime($event)">
+        <label id="example-radio-group-label">Vista información</label>
+        <mat-radio-button value="week">Semana</mat-radio-button>
+        <mat-radio-button value="month">Mes</mat-radio-button>
+    </mat-radio-group>
+    <h2>Mira el tiempo disponible de tu equipo</h2>
+    <div>
+        <button mat-mini-fab color="primary" (click)="BackTime()">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        {{getCurrentlyTime()}}
+        <button mat-mini-fab color="primary" (click)="ForwardTime()">
+            <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+
+    </div>
+    <div class="capacity-content">
+        <div class="card">
+            <div class="main-info">
+                <h2>{{leadInfo.title}}</h2>
+                <p><sub>{{leadInfo.amount}} Personas</sub></p>
+            </div>
+            <div class="capacity-info">
+                <p>
+                    {{leadInfo.hours}} Horas
+                </p>
+            </div>
+        </div>
+        <div *ngFor="let team of showListCapacity" class="card">
+            <div class="main-info">
+                <h2>{{team.title}}</h2>
+                <p>
+                    <sub>{{team.timezone}}</sub><br>
+                </p>
+                <p>
+                    <sub>{{team.amount}} Personas</sub>
+                </p>
+            </div>
+            <div class="capacity-info">
+                <p>{{team.days}} dias | {{team.hours}} Horas</p>
+            </div>
+        </div>
+    </div>
+</div>

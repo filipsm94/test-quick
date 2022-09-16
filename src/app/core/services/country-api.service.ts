@@ -13,7 +13,13 @@ export class CountryApiService {
 
   getAllCountries(): Promise<Array<ICountryModel>> {
     return firstValueFrom(
-      this.http.get<Array<ICountryModel>>(`${this._dataUrl}`).pipe(map((response:any) => response.countries))
+      this.http.get<Array<ICountryModel>>(`${this._dataUrl}`).pipe(map((response: any) => response.countries))
+    );
+  }
+
+  getAllHolidayByCountry(year: number, countryCode: string) {
+    return firstValueFrom(
+      this.http.get<Array<any>>(`https://date.nager.at/api/v3/PublicHolidays/${year}/${countryCode}`).pipe(map((response: any) => response))
     );
   }
 }

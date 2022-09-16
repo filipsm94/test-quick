@@ -1,9 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { empytTeam } from 'src/app/shared/constans/state.constant';
 import { ITeamModel } from 'src/app/shared/models/state.model';
 import { deleteTeam, updateTeamInfo } from '../../actions/team.actions';
 
-export const QuickTeam: Array<ITeamModel> = [{...empytTeam}]
+export const QuickTeam: Array<ITeamModel> = []
 
 const _TeamReducer = createReducer(
     QuickTeam,
